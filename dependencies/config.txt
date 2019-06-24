@@ -2,7 +2,7 @@
 #Following are the available options:
 
 #Model: serial, mpi, hybrid
-model: serial
+model: mpi
 
 #minParallelDegree: positive numeric value
 minParallelDeGREE: 5000
