@@ -6,12 +6,18 @@ Its Parallelizing Compiler takes the sequential Dwarf code and produces either D
 ```shell
 sh dwarf.sh <dwarf file name>.dw
 ```
-  It will produce output.cpp, outputslave.cpp, output.h, Point.cpp, and Point.h in cppsrc directory.
+  It will produce [output.cpp](cppsrc/output.cpp) , [outputslave.cpp](cppsrc/outputslave.cpp), [output.h](cppsrc/output.h), [Point.cpp](cppsrc/Point.cpp), and [Point.h](cppsrc/Point.h) in [cppsrc](cppsrc) directory.
   
 
 ## Dependencies
 The Dwarf Compiler requires Java 1.8.
-It requires config.txt and weka.jar available in dependencies directory.
+It requires [config.txt](dependencies/config.txt) and [weka.jar](dependencies/weka.jar) available in the [dependencies](dependencies) directory.
 
 ## Generated CPP Code
-Check cppsrc directory for SERIAL, DISTRIBUTED, and HYBRID codes of K-means and EM algorithm generated from kmeans.dw and em.dw source codes.
+Compiler generates code in cppsrc directory. It already has a few codes.
+
+| Platform\Algorithm  | K-means Algorithm | EM Algorithm | 
+| ------------------- | ----------------- | ------------ |
+| Serial C++ Code | [KDSeq](cppsrc/KDSeq)  | [EDSeq](cppsrc/EDSeq)  |
+| Distributed-memory Parallel MPI C++ Code | [KDDis](cppsrc/KDDis)  | [EDDis](cppsrc/EDDis)  |
+| Hybrid-memory Parallel MPI OpenMP C++ Code | [KDHyb](cppsrc/KDHyb)  | [EDHyb](cppsrc/EDHyb)  |
