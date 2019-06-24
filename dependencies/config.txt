@@ -1,0 +1,16 @@
+#Configurable parameters should go here
+#Following are the available options:
+
+#Model: serial, mpi, hybrid
+model: serial
+
+#minParallelDegree: positive numeric value
+minParallelDeGREE: 5000
+
+#Default persistent distribution type for input data
+#persistent: distributed or broadcast
+persistent: broadcast
+#persistent: distributed
+
+#Optimization Level: 1 for Serial MapReduce Agglomeration
+optimize: 1

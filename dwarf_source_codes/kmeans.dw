@@ -1,0 +1,59 @@
+use clustering.dwh;
+class KmeansCluster {
+	Point rep;
+	Point oldRep;
+	int count;
+	KmeansCluster(Point p)	{
+		rep =  p;
+		oldRep = p;
+		count = 0;
+	}
+}
+float ConvergenceCriteria(List CL) {
+	x = [distanceEuclidean(c.oldRep, c.rep) for c in CL];
+	y = reduce(SUM, x, true);
+	return (y/CL.Size());
+}
+
+main() {
+	File ff;
+	data = ff.ReadDataset("datasets/3droad.arff");
+	K = 100;
+	List seeds, CL;
+	seeds = [data[i] for i in [0..K-1]];
+	CL = [KmeansCluster(seeds[i]) for i in [0..K-1]];
+	
+	double threshold = 0.5;
+	write ("Number of points:", data.Size(), "\nK :", K, "\nError threshold :", threshold);
+	write("\nseeds:", seeds);
+	error = 100.0;
+	Point p;
+	iter = 0;
+	while (error > threshold) {
+		for (clus in CL) {
+			clus.count = 0;
+			clus.oldRep = clus.rep;
+			a = clus.rep.InitializePoint();
+		}
+		
+		for (i in data) {
+			index = reduce(MIN, [distanceEuclidean(i, CC.oldRep) for CC in CL], false);
+			CL[index].rep = CL[index].rep + i;
+			CL[index].count = CL[index].count + 1;
+		}
+		
+		for (clus in CL) {
+			sum = clus.rep;
+			if (clus.count != 0) {
+				clus.rep = sum / clus.count;
+			}
+		}
+		error = ConvergenceCriteria(CL);
+	}
+	write("\nClustering Results: ");
+	xy = 0;
+	for (c in CL) {
+		xy = xy + 1;
+		write("\nCluster: ", xy, ", Members: ", c.count, ", Centroid:", c.rep);
+	}
+}

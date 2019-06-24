@@ -1,0 +1,97 @@
+use clustering.dwh;
+class EMCluster {
+	Point mu;
+	Point oldmu;
+	Point musum;
+	double pc;
+	double wsum;
+	Point sigma;
+	Point sigmasum;
+	EMCluster(Point p, int dim, double w) {
+		mu = p;
+		oldmu = p;
+		musum = p;
+		sigma = p;
+		wsum = w;
+		pc = w;
+		dim = sigma.InitializePoint(1.0);
+		sigmasum = sigma;
+	}
+}
+double GMM(Point x, Point mu, Point sigma, double prob){
+	int dim = x.Size();
+	double sum = 0.0, a, b, c, prod = 1.0, piv = 1.0;
+	for(i in [0..dim-1])	{
+		sum = sum + ((x[i] - mu[i]) *  (x[i] - mu[i]) / sigma[i]);
+		prod = prod * sigma[i];
+		piv = piv * PI();
+	}
+	a = exponent (-sum / 2);
+	b = sqrt(piv * (1<<dim) * prod);
+	c = (a / b) * prob;
+	return c;
+}
+double convergence(List<EMCluster> clusList){
+	List<double> x = [ distanceEuclideanSquared(clus.oldmu, clus.mu) for clus in clusList];
+	return reduce(SUM, x, true);
+}
+double distanceEuclideanSquared(Point A, Point B) {
+	double t = distanceEuclidean(A, B);
+	return t * t;
+}
+Point pointSquare(Point A){
+	Point B = A;
+	int dim = A.Size();
+	for(i in [0..dim-1])	{
+		B[i] = A[i] * A[i];
+	}
+	return B;
+}
+main(){
+	K = 5;			error = 0.2;		EPS = 0.0001;		maxIter = 10; 
+	File inputFile;	List<Point> data;
+	data = inputFile.ReadDataset("datasets/3droad.arff");
+	int dim = data[0].Size();
+	seeds = [data[i] for i in [0..K-1]];
+	clusList = [EMCluster(seeds[i], dim, 1.0/K) for i in [0..K-1]];
+	int iter = 1;
+	List<int> klist = [0..K-1];
+	while(error > EPS && iter <= maxIter)	{
+		for (clus in clusList) {
+			clus.oldmu = clus.mu;
+			clus.wsum = 0.0;
+			a = clus.musum.InitializePoint();
+			b = clus.sigmasum.InitializePoint();
+		}
+		for(xj in data)		{
+			numerators = [ GMM(xj, clus.mu, clus.sigma, clus.pc) for clus in clusList];
+			denominator = reduce(SUM, numerators, true);
+			for(i in klist)
+			{
+				double gamma;
+				Point temp, temp1;
+				gamma = numerators[i] / denominator;
+				clusList[i].wsum = clusList[i].wsum + gamma;
+				temp = xj * gamma;
+				clusList[i].musum = clusList[i].musum + temp;
+				temp1 = pointSquare(xj) * gamma;
+				clusList[i].sigmasum = clusList[i].sigmasum + temp1;
+			}
+			numerators.Free();
+		}
+		for(clus in clusList)		{
+			clus.pc = clus.wsum / n;
+			clus.mu = clus.musum / clus.wsum;
+			clus.sigma = (clus.sigmasum / clus.wsum) - pointSquare(clus.mu);
+		}
+		error = convergence(clusList);
+		iter = iter + 1;
+	}
+	for(i in klist)	{
+		p = clusList[i].mu;
+		s = clusList[i].sigma;
+		c = clusList[i].pc;
+		write("Cluster centre: ", i, "\t", p, "\t\tsigma: ", s, "\tpc: ", c);
+		
+	}
+}

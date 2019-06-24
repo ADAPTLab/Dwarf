@@ -1,0 +1,14 @@
+double distanceEuclidean (Point A, Point B);
+double MIN(double a, double b);
+double MAX(double a, double b);
+double MEAN(double a, double b);
+Point MEAN(Point A, Point B);
+Point SUM(Point A, Point B);
+double SUM(double A, double B);
+double sqrt(double a);
+double exponent(double a);
+double pow(double a, double b);
+double PI();
+Point pointSquare(Point A);
+double GMM(Point x, Point mu, Point sigma, double prob);
+double DOUBLE_MAX();
