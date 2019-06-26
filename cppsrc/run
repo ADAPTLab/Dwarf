@@ -1,0 +1,29 @@
+#make clean
+#make -j 6 all
+
+#datasets="delucia8M fof113M3d fof227M3d"
+#datasets="fof113M3d fof227M3d"
+datasets="font10M11d"
+procs="32 24 16 8"
+cores="8 4"
+threads=1;
+for dataset in $datasets;
+do
+	for p in $procs;
+	do
+		f=~/data/$dataset.arff;
+		result=./results/kmeans.$dataset.2000.mpi.$p;
+		make mpircluster f=$f K=2000 p=$p ARG=$threads | tee $result
+		#echo "f=$f K=2000 p=$p ARG=$threads";
+	done;
+	p=32;
+	for threads in $cores;
+        do
+                f=~/data/$dataset.arff;
+                result=./results/kmeans.$dataset.2000.hybrid.$p.$threads;
+                make hybridrcluster f=$f K=2000 p=$p ARG=$threads | tee $result
+                #echo "f=$f K=2000 p=$p ARG=$threads";
+         done;
+done;
+
+echo "Profiling done at: `date`" >> $result
