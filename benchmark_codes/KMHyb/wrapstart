@@ -1,0 +1,6 @@
+datasets="delucia8M font10M11d fof113M3d fof227M3d"
+#datasets="font10M11d"
+for i in $datasets;
+do
+  	./start.sh $i;
+done;

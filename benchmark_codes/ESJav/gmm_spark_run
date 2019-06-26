@@ -1,0 +1,5 @@
+rm -r GaussianMixtureModel
+spark-submit --class  com.sat.gmm.Main3 --master=$1 --driver-memory 16g --num-executors 1 --executor-memory 8g gaussianmixturemodelEM-1.0-jar-with-dependencies.jar $2 $3 $4 $5 $6
+
+
+

@@ -1,0 +1,65 @@
+#!/bin/bash
+###################################################
+#	use this for single experimentation
+##################################################
+
+#dataset=bower3L8dnorm
+#dataset=$1
+#datadir=./data
+datadir=file:///home/sparkuser/parth_em/parth_em_custom/data
+clusterdir=./clusteringResults
+timedir=./results2ndDec18
+
+#make clean all
+
+host=compute-0-2
+
+nodes="32"
+#nodes="1"
+#clusters="15 20"
+clusters="100"
+
+#datasets="gen10K gen1L"
+#datasets="bower3L8dnorm HIGGS2L8dnorm"
+#datasets="gen5L3d"
+#datasets="syn5L3d syn1_5L3d syn1_1M3d syn1_2M3d syn1_4M3d"
+#datasets="galaxy"
+#datasets="matlab10K2d matlab50K2d matlab1L2d matlab5L2d matlab1M2d matlab2M2d"
+#datasets="matlabten10K2d matlabten50K2d matlabten1L2d matlabten5L2d matlabten1M2d matlabten2M2d"
+#datasets="matlab10K2d matlab50K2d"
+
+#datasets="matlab5L2d matlab1M2d"
+#datasets="matlabten5L2d matlabten1M2d matlabten2M2d"
+#datasets="matlabten10M2d"
+#datasets="fof56M3d"
+#datasets="matlabten2M2d"
+
+#datasets="temp20M2d temp10M2d temp100M2d"
+#datasets="temp10M2d"
+#datasets="matlabten1L2d"
+#datasets="temp100M2d"
+datasets="delucia8M_norm font10M11d_norm fof113M3d_norm fof227M3d_norm"
+#datasets="font10M11d_norm"
+#datasets="fof113M3d_norm fof227M3d_norm"
+#datasets="fof113M3d_norm"
+
+iter=5
+error=0.0001
+for dataset in $datasets;
+do
+  	for K in $clusters;
+        do
+          	for node in $nodes;
+                do
+			#timeoutfile=$timedir/em.spark.$dataset.k$K.serial
+			#timeoutfile=$timedir/em.spark.$dataset.k$K.parallel.$node
+			timeoutfile=$timedir/em.spark.$dataset.k$K.hybrid.$node.core4
+                        #make serial f=$datadir/$dataset.arff K=$K host=$host | tee $timeoutfile
+                        #echo $timeoutfile
+			#./gmm_spark_run local $datadir/$dataset.csv $K $iter $error $timeoutfile
+			./gmm_spark_run spark://192.168.17.170:7077 $datadir/$dataset.csv $K $iter $error $timeoutfile
+			#dataset clusters iterations error outputFile
+                done;
+        done;
+done;
+
