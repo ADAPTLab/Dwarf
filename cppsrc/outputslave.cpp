@@ -13,7 +13,7 @@ try {
 }
 catch(std::exception &e) {
 	 std::cout << std::string(e.what()) +" At line no. 2, function "
-	 + "func in file Basic_tests\/test-1.dw" << std::endl;
+	 + "func in file dwarf_source_codes\/test_cases\/basic_tests\/test-1.dw" << std::endl;
 }
 }
 int main(int argc, char *argv[]) {

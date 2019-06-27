@@ -19,6 +19,7 @@
 #include "cereal/archives/binary.hpp"
 #include "cereal/types/vector.hpp"
 using namespace std;
+typedef unsigned long ulong;
 
 typedef char myChar[MAXSTRINGLEN];
 
@@ -28,6 +29,16 @@ class List
 private :
     std::shared_ptr<std::vector<T>> Elems;
 public :
+	List<T>& operator+=(List<T> &other) {
+		for (int i = 0; i < other.Size(); i++) {
+			this->AddEle(other[i]);
+		}
+		return *this;
+	}
+	void SetElementsPtr(std::shared_ptr<std::vector<T>> ptr)
+	{
+		this->Elems = ptr;
+	}
     void AddEle(T const& Ele); // adds an ele to the end of the list
     void SetEleAt(int index, T const& Ele); // adds an ele at the specified index in the vector, does not shift other eles
     int FindEle(T const& Ele); // returns the index of the ele if present else -1
