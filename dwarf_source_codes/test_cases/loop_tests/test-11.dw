@@ -1,0 +1,39 @@
+class A{
+	int mem1;
+	int setValue(int a){
+		mem1 = a*a;
+		return mem1;
+	}
+}
+
+A listA(int a){
+	A temp;
+	temp.setValue(a);
+	return temp;
+}
+
+int lower_limit(){
+	return 1;
+}
+
+int upper_limit(){
+	return 10;
+}
+
+int listB(int a){
+	return a*a;
+}
+
+main(){
+        List x = [1..10];
+        for (i in [0..x.Size()]) {
+            x[i] = x[i] + 1;
+        }
+	/*List a = [1..10];		
+	List b = [listA(i) for i in [j for j in [k for k in [l for l in a]]] if (i <= 5)];
+	List d = [listB(i.mem1) for i in b];
+	List c = [listA(i) for i in a if (i <= 5) and for j in a];
+	List e = [listB(i.mem1) for i in c];
+	write(d, "\n");
+	write(e, "\n");*/
+}

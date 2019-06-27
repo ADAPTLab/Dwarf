@@ -1,0 +1,28 @@
+//List as argument to object
+class A
+{
+	int a;
+	List mem;
+	A(int i,List x)
+	{
+		a = i;
+		mem = x;
+	} 
+	/*add(int y)
+	{
+		mem = mem+[y];
+	}*/
+}
+main()
+{
+	List l = [1,2,3];
+	ob = A(0,l);
+	if(ob.l == l)
+	{
+		write("Test Successful\n");
+	}
+	else
+	{
+		write("Test Unsuccessful\n");
+	}
+}

@@ -1,0 +1,21 @@
+//Testing String
+string func(string a,string b)
+{
+	
+	return a + b;
+	
+}
+main()
+{
+	a ="BITS";
+	b = " Pilani";
+	c = func(a,b);
+	if(c == "BITS Pilani")
+	{
+		write("Test Successful\n");
+	}
+	else
+	{
+		write("Test Failed\n");
+	}
+}

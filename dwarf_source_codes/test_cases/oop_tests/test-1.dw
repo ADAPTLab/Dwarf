@@ -1,0 +1,25 @@
+//basic test
+class C
+{
+	int a;
+	float b;
+	string z;
+	C(int i)
+	{
+		a= i;
+		b = 5.0;
+		z = "hi";
+	}
+}
+main()
+{
+	C a = C(2);
+	if(a.a == 2 && a.b == 5.0&&a.z == "hi")
+	{
+		write("Test Successful\n");
+	}
+	else
+	{
+		write("Test Unsuccessul\n");
+	}
+}

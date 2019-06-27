@@ -18,19 +18,64 @@
 #include "cereal/types/vector.hpp"
 
 #define MAXSTRINGLEN 8
-typedef double PointEle;
-static const int MaxEles = 3;
-#define distanceEuclidean(A, B) (sqrt(                                              \
-	((A).point_arr[0] - (B).point_arr[0]) * ((A).point_arr[0] - (B).point_arr[0]) + \
-	((A).point_arr[1] - (B).point_arr[1]) * ((A).point_arr[1] - (B).point_arr[1]) + \
-	((A).point_arr[2] - (B).point_arr[2]) * ((A).point_arr[2] - (B).point_arr[2])))
+#define GENERAL_POINT
+static const int MaxEles = 0;
+struct PointEle
+{
+	enum {INT, FLOAT, BOOLEAN, STRING, ERROR} tag;
+	union
+	{
+		int a;
+		double b;
+		bool c;
+		char d[MAXSTRINGLEN];
+	};
+	template <class Archive>
+	void serialize( Archive &ar)
+	{
+		ar(tag);
+		switch(tag)
+		{
+			case INT:	ar(a);
+					break;
+			case FLOAT:	ar(b);
+					break;
+			case BOOLEAN:	ar(c);
+					break;
+			case STRING:	ar(d);
+					break;
+			case ERROR:	break;
+		}
+	}
+	PointEle();
+	PointEle(int val);
+	PointEle(bool val);
+	PointEle(std::string val);
+	PointEle(double val);
+	PointEle operator= (int val);
+	operator double() const
+	{
+		switch(tag)
+		{
+			case INT:	return a;
+			case FLOAT:	return b;
+			case BOOLEAN:	return c;
+			default:	throw std::domain_error("\n**function not defined for current Point Element**\n");
+		}
+	}
+	PointEle operator+= (PointEle &p);
+	PointEle operator-= (PointEle &p);
+	PointEle operator- (PointEle &p);
+	PointEle operator+ (PointEle &p);
+	PointEle operator/ (int p);
+};
 class Point
 {
-	//private:
+//private:
 public:
-	PointEle point_arr[MaxEles];
-	int NumEles;
-	//public:
+std::vector <PointEle> point_arr;
+int NumEles;
+//public:
 	Point()
 	{
 		NumEles = 0;
@@ -38,7 +83,7 @@ public:
 	template <class Archive>
 	void serialize(Archive &ar)
 	{
-		ar(CEREAL_NVP(point_arr), NumEles);
+		ar(CEREAL_NVP(point_arr),NumEles);
 	}
 	int GetSize();
 	int Size();
@@ -48,7 +93,7 @@ public:
 	//double GetEleAtIndex(int index);
 	inline double GetEleAtIndex(int index)
 	{
-		if (index >= 0 && index < NumEles)
+		if(index >= 0 && index < NumEles)
 			return this->point_arr[index];
 		throw std::out_of_range("\n**index out of bounds**\n");
 	}
@@ -63,15 +108,15 @@ public:
 	void SetStringAt(int index, std::string val);
 	void SetFloatAt(int index, double val);
 	void SetDoubleAt(int index, double val);
-	PointEle operator[](int pos);
-	Point &operator+=(Point &p);
-	Point operator+(Point &p);
-	Point operator-(Point p);
-	Point &operator-=(Point &p);
-	Point operator/(int p);
-	Point operator*(double val);
-	Point operator/(double val);
-	bool operator==(Point p);
+	PointEle operator[] (int pos);
+	Point& operator+= (Point &p);
+	Point operator+ (Point &p);
+	Point operator- (Point p);
+	Point& operator-= (Point &p);
+	Point operator/ (int p);
+	Point operator* (double val);
+	Point operator/ (double val);
+	bool operator== (Point p);
 };
-std::ostream &operator<<(std::ostream &out, Point p);
+std::ostream& operator<< (std::ostream& out, Point p);
 #endif

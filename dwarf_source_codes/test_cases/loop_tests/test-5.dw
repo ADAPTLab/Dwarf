@@ -1,0 +1,19 @@
+//iterating elements of a list
+main()
+{
+	List x = [[0,1],[2,3]];
+	int e = 0;
+	List y = x[1];
+	for(ele in y)
+	{
+		e = e+ele;
+	}
+	if(e == 5)
+	{
+		write("Test Successful\n");
+	}
+	else
+	{
+		write("Test Unsuccessful\n");
+	}
+}

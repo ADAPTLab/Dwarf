@@ -1,0 +1,32 @@
+class Ob1
+{
+	int a;
+	float b;
+	Ob1(int i,float f)
+	{
+		a = i;
+		b = f;
+	}
+}
+class Ob2
+{
+	Ob1 o1;
+	int a;
+	Ob2(int i,int j,float f)
+	{
+		a = i;
+		o1 = Ob1(j,f);
+	}
+}
+main()
+{
+	 Ob2 o2 = Ob2(1,2,3.0);
+	 if(o2.o1.a == 2)
+	{
+		write("Test Successful\n");
+	}
+	else
+	{
+		write("Test Unsuccessful\n");
+	}
+}

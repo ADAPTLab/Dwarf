@@ -1,0 +1,25 @@
+// testing recursion 
+
+int func(int j)
+{
+	if(j>0)
+	{
+		//j--;
+		j = j-1;
+		return func(j);
+	}
+	else if(j == 0)
+	{
+		return 5;
+	}
+}
+main()
+{
+	write(func(3));
+	if(func(3) == 5)
+	{
+		write("test successful");
+		write("\n");
+	}
+}
+

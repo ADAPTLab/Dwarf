@@ -1,0 +1,23 @@
+//nested for loops
+main()
+{
+	x = 1;
+	y = [3,4,5];
+	for (i in [0..2])
+	{
+		for(j in y)
+		{
+			x = x+j;
+		}
+		
+	}
+	if(x == 37)
+	{
+		write("test Succesful\n");
+		
+	}
+	else
+	{
+		write("test Unsuccesful\n");
+	}
+}

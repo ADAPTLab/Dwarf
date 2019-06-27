@@ -1,0 +1,38 @@
+//Point in an object+inheritance
+class A
+{
+	Point b;
+	int a;
+	A(int x,Point p)
+	{
+		a = x;
+		b = p;
+	}
+	Point add(Point x)
+	{
+		b = b+x;
+		return b+x;
+	}
+}
+class B inherits A
+{
+	Point x;
+	B(Point p)
+	{
+		x = p;
+	}	
+}
+main()
+{	
+	A a = A(1,$2,3$);
+	B b = B($3,4$);
+	Point x = b.add($1,2$);
+	if(x == $4,6$)
+	{
+		write("Test Successful\n");
+	}
+	else
+	{
+		write("Test Unsuccessful\n");
+	}
+}

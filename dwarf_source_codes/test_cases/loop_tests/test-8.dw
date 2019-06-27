@@ -1,0 +1,24 @@
+//Scoping
+main()
+{
+	a = 5;
+	int b = 1;
+	while(b<5)
+	{
+		int a = 1;
+		for(k in [0..2])
+		{
+			a = a+k;
+		}
+		b = b+1;
+	}
+	write(a);
+	if(a == 5)
+	{
+		write("Test Successful\n");
+	}
+	else
+	{
+		write("Test Unsuccessful\n");
+	}
+}

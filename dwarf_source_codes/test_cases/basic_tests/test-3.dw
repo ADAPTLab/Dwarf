@@ -1,0 +1,18 @@
+//testing Nested Lists and List as return type
+
+List func(List a)
+{
+	return a[0];
+}
+
+main()
+{
+	List data = [[1,2],[2,3]];
+	b = func(data);
+	write(b);
+	/*if(func(data))
+	{
+		write("test successful");
+		write("\n");
+	}*/
+}

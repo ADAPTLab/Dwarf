@@ -9,33 +9,26 @@ void* Reduce(T f(T, T), std::vector<T> &l, bool b)
 {
     if (l.empty())
         return NULL;
-    //std::cout<< "size of l:" << l.size() << std::endl;
     void* result;
 
     T Res = l[0];
     for (int i = 1; i < l.size(); i++)
     {
         Res = f(Res, l[i]);
-        //if(b)   std::cout << "Point processed: " << i << " out of " << l.size() << std::endl;
     }
     if (b)
     {
-        //std::cout << "before point is: " << Res << std::endl;
-        //result = (T *)malloc(sizeof(T));
         result = new T();
         if (result != NULL)
             *((T *)result) = Res;
         else
             std::cout << "EXIT" << std::endl;
-        //std::cout << "after point is: " << result << std::endl;
     }
     else
     {
 
         static int pos;
 	pos = distance(l.begin(), std::find(l.begin(), l.end(), Res));
-        //result = (int *)malloc(sizeof(int));
-        //*((int *)result) = __pos__;
 	result = &pos;
     }
     return result;
@@ -57,35 +50,6 @@ double distanceEuclidean(Point &A, Point &B) {
 } 
 #endif
 
-/*inline double distanceEuclidean(Point &A, Point &B) {
-    double temp;
-    int dim;
-    double d;
-    temp = 0.0;
-    d = 0.0;
-    dim = A.Size();
-    for (int i = 0; i < dim; i++) {
-        temp = A.GetEleAtIndex(i) - B.GetEleAtIndex(i);
-        d = d + (temp * temp);
-    }
-    d = sqrt(d);
-    return d;
-}
-
-inline float FdistanceEuclidean(Point &A, Point &B) {
-    float temp;
-    int dim;
-    float d;
-    temp = 0.0;
-    d = 0.0;
-    dim = A.Size();
-    for (int i = 0; i < dim; i++) {
-        temp = A.GetEleAtIndex(i) - B.GetEleAtIndex(i);
-        d = d + (temp * temp);
-    }
-    d = sqrt(d);
-    return d;
-}*/
 
 double MIN(double a, double b) {
     if (a <= b) {
@@ -110,114 +74,6 @@ Point SUM(Point A, Point B) {
 double SUM(double A, double B) {
     return (A + B);
 }
-
-/*
-template <typename T>
-void* ReduceMean(std::vector<T> l, bool b)
-{
-    if (l.empty())
-        return NULL;
-    //std::cout<< "size of l:" << l.size() << std::endl;
-    void* result;
-    int n, i , j, listSize, pointSize;
-
-    listSize = l.size();
-    T Res = l[0];
-    //std::cout << "\nBefore: " << l[0];
-    double listSizef = (double)listSize;
-    pointSize = Res.GetSize();
-    for (i = 1; i < listSize; i++)
-    {
-        //if(b)   std::cout << "Point processed: " << i << " out of " << l.size() << std::endl;
-        for (j = 0; j < pointSize; j++)
-        {
-            PointEle pe1, pe2;
-            pe1 = Res.GetPointEleAtIndex(j);
-            pe2 = (l[i]).GetPointEleAtIndex(j);
-            if (pe1.tag == pe2.tag)
-            {
-                //pele.tag = pe1.tag;
-                if (i < listSize )
-                {
-                    if (pe1.tag == PointEle::INT)
-                    {
-                        //pele.a = pe1.a + pe2.a;
-                        Res.SetIntegerAt(j, pe1.a + pe2.a);
-                    }
-                    else
-                    {
-                        //pele.b = pe1.b + pe2.b;
-                        Res.SetFloatAt(j, pe1.b + pe2.b);
-                    }
-                }
-//                else if(i == listSize -1)
-//                {
-//                    if(pe1.tag == PointEle::INT)
-//                    {
-//                         //pele.a = (pe1.a + pe2.a) / listSize;
-//                         Res.SetIntegerAt(j, (pe1.a + pe2.a) / listSize);
-//                    }
-//                    else
-//                    {
-//                        //pele.b = (pe1.b + pe2.b) / listSizef;
-//                        Res.SetFloatAt(j, (pe1.b + pe2.b) / listSizef);
-//                    }
-//                }
-
-
-
-                //Res.InsertPointEleAt(pele, j);
-            }
-        }
-
-    }
-
-
-    // std::cout << " After: " << Res;
-    //std::cout << "\nlist size: " << listSize << " list size: "<< listSizef << " POint size: " << Res.Size();
-    if (listSize != 0)
-    {
-        double listSizef = (double)listSize;
-        for (i = 0; i < pointSize; i++)
-        {
-            PointEle pele, pe;
-            pe = Res.GetPointEleAtIndex(i);
-            pele.tag = pe.tag;
-            if (pe.tag == PointEle::INT)
-            {
-                pele.a = pe.a / listSize;
-                Res.SetIntegerAt(i, pele.a);
-            }
-            else if (pe.tag == PointEle::FLOAT)
-            {
-                pele.b = pe.b / listSizef;
-                Res.SetFloatAt(i, pele.b);
-            }
-
-
-            //Res.InsertPointEleAt(pele, i);
-
-        }
-    }
-
-    if (b)
-    {
-        result = new T();
-        if (result != NULL)
-            *((T *)result) = Res;
-        else
-            std::cout << "EXIT" << std::endl;
-
-    }
-    else
-    {
-
-        int pos = distance(l.begin(), std::find(l.begin(), l.end(), Res));
-        result = (int *)malloc(sizeof(int));
-        *((int *)result) = pos;
-    }
-    return result;
-}*/
 
 // function that broadcasts an object of type T
 template <typename T>

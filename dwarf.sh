@@ -21,4 +21,37 @@ if ! [ -e "$1" ]; then
   exit 1
 fi
 
+echo "\tCompiling Dwarf Source Code using Dwarf Compiler"
 java -jar dwarf.jar $1 $CPP_OUT_DIR/$CPP_OUT_FILE $VERBOSITY_LEVEL $CONFIG_FILE
+
+if [ $? -eq 1 ] ;	then
+	echo "\tError occured during compilation\nTerminating script\n"
+	exit 1
+else
+	echo "\n\tDwarf Compilation Successful.\n"
+fi
+
+cd $CPP_OUT_DIR
+
+echo "\tCompiling Dwarf Compiler generated C++ Code using C++ Compiler"
+make clean all
+
+if [ $? -eq 1 ] ;	then
+	echo "\tError occured during compilation\nTerminating script\n"
+	exit 1
+else
+	echo "\n\tC++ Compilation Successful.\n"
+fi
+
+# Uncomment one of the following
+echo "\tStarting Sequential Execution on the local machine\n"
+make localserial
+
+#echo "\tStarting Distributed-memory Execution on the local machine using 4 local processes\n"
+#make localpar p=4
+
+#echo "\tStarting Distributed-memory Execution on the Cluster using 32 distributed processes\n"
+#make mpircluster p=32
+
+#echo "\tStarting Hybrid-memory Execution on the Cluster using 32 distributed processes with 4 threads in each\n"
+#make hybridrcluster p=32 ARG=4

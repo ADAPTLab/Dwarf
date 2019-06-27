@@ -1,0 +1,35 @@
+class A
+{
+	int a;
+	float b;
+	A(int i,float x)
+	{
+		a = i;
+		b = x;
+	}
+	int add(int j)
+	{
+		return a+j;
+	}
+}
+class B inherits A
+{
+	List x;
+	B(int i,float f, List a)
+	{
+		A(i,f);
+		x = a;
+	}
+	int add(int j)
+	{
+		a = a+2*j;
+		return a;
+	}
+}
+main()
+{
+	List l = [1,2,3];
+	A a = A(1,1.0);
+	B b = B(2,2.0,l);
+	
+}

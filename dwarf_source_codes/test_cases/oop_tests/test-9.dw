@@ -1,0 +1,51 @@
+//if and loop inside class method
+class A()
+{
+	int a = 2;
+	float b;
+	void mul(int k, int j)
+	{
+		if(a%2 == 0){
+		
+		for(i in [0..k-1])
+		{
+			a = a*j;
+		}
+		
+	}
+	else
+	{
+		for(i in [0..k-1])
+		{
+			a = a/j;
+		}
+	}
+	}
+	
+}
+main()
+{
+	A a = A();
+	a.mul(3,3);
+	if(a.a == 9)
+	{
+		a.mul(3,3);
+		
+		{
+			if(a.a == 1)
+			{
+				write("Test Successful\n");
+			}
+			else
+			{
+				write("Test Unsuccessful\n");
+			}
+		}
+
+	}
+	else
+	{
+		write("Test Unsuccessful\n");
+	}
+	
+}

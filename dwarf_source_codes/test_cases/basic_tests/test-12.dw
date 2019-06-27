@@ -1,0 +1,13 @@
+//Substring OPerations
+main()
+{
+	b = "BITS Pilani";
+	if(b[0:3] == "BITS"&&b[5:b.Size()-1] == "Pilani"&&b[1] == "I")
+	{
+		write("Test Successful\n");
+	}
+	else
+	{
+		write("Test Unsuccessful\n");
+	}
+}

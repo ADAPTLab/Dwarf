@@ -1,0 +1,29 @@
+//nested While
+main()
+{
+	i = 5;
+	k = 0;
+	while(i>0)
+	{
+		while(i>=k)
+		{
+
+			i = i-1;
+			k = k+1;
+			
+		}
+		if(i > 2)
+		{
+			
+			write("test Unsuccessful\n");
+			i = -1;
+		}
+		i = i-1;
+		
+		
+	}
+	if(i == 0)
+	{
+		write("test Successful\n");
+	}
+}

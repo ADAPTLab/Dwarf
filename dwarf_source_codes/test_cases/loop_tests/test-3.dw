@@ -1,0 +1,25 @@
+//Test repeat-until----Number of iterations
+int square(int a)
+{
+	return a*a;
+}
+main()
+{
+	int a = 2;
+	int i = 1;
+	repeat
+	{
+	 a = square(a);
+	 i = i+2;	
+	}until(i,1,3);
+	if(a == 256)
+	{
+		write("Test Successful\n");
+	}
+	else
+	{
+		write(a);
+		write("Test Unsuccessful\n");
+	}
+
+}

@@ -1,0 +1,22 @@
+//multi-level inheritance
+
+class A
+{
+	
+}
+class B inherits A
+{
+	
+}
+class C inherits B
+{
+	
+}
+class D inherits C
+{
+
+}
+
+main()
+{
+}

@@ -1,0 +1,51 @@
+//inheritance
+class A
+{
+	int a;
+	float b;
+	A(int i,float x)
+	{
+		a = i;
+		b = x;
+	}
+	int add(int j)
+	{
+		a = a+j;
+		return a+j;
+	}
+	float addf(float f)
+	{
+		b = b+f;
+		return f;
+	}
+}
+class B inherits A
+{
+	float x;
+	B(int i,float f, float a)
+	{
+		A(i,f);
+		x = a;
+	}
+	int add(int j)
+	{
+		a = a+2*j;
+		return a;
+	}
+}
+main()
+{
+	A a = A(1,1.0);
+	B b = B(2,2.0,4.0);
+	a.add(3);
+	b.add(4);
+	b.addf(2.0);
+	if(a.a == 4&&b.a == 10&&b.b == 4.0)
+	{
+		write("Test Succesful\n");
+	}
+	else
+	{
+		write("Test Unsuccesful\n");
+	}
+}

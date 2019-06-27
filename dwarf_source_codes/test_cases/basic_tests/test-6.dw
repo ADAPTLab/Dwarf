@@ -1,0 +1,17 @@
+//multiple function signature
+int func(int a,int b,int c)
+{
+	d =  a+b;
+	c = d+c;
+	return c;
+}
+int func(int a,int b)
+{
+	return a+b;
+}
+main()
+{
+	write(func(1,2,3));
+	write(func(2,3));
+	//write(func2('b','c'));
+}

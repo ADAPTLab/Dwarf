@@ -1,0 +1,9 @@
+//Looping over strng characters
+main()
+{
+	string a = "ABC";
+	for (cha in a)
+	{
+		write(cha);
+	}
+}

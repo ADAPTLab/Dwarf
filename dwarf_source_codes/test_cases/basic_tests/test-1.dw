@@ -1,0 +1,14 @@
+//testing empty function
+void func()
+{
+	
+}
+
+main()
+{
+	
+	func();
+	write("test successful\n");
+
+	
+}

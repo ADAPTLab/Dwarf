@@ -1,0 +1,59 @@
+//method overloading
+class A
+{
+	int a;
+	int b;
+	int c;
+	A(int i)
+	{
+		a = i;
+		b = 2;
+		c = 3;
+	}
+	int add(int i)
+	{
+		a = a+2;
+		return a;
+	}
+	int add(int i,int j)
+	{
+		a = a+i;
+		b = b+j;
+		return b;
+	}
+	List add(int i,int j,int k)
+	{
+		return [a+i,b+j,c+k];
+	}
+}
+main()
+{
+	A a = A(1);
+	a.add(1);
+	if(a.a == 3)
+	{
+		a.add(2,3);
+		if(a.a == 5&&a.b == 5)
+		{
+			List l = a.add(1,2,3);
+			List l2 = [6,7,6];
+			if(l == l2)
+			{
+				write("Test Successful\n");
+			}
+			else
+			{
+				write("Test Unsuccessful\n");
+			}
+		}
+		else
+		{
+			write("Test Unsuccessful");
+		}
+	}
+	else
+	{
+		write("Test Unsuccessful");
+	}
+}
+

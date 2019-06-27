@@ -1,0 +1,37 @@
+//Testing iteration over Objects of a list
+class xyz
+{
+	int x;
+	int y;
+	int z;
+	xyz(int i,int j, int k)
+	{
+		x= i;
+		y = j;
+		z = k;
+	}
+	
+}
+main()
+{
+	xyz A= xyz(0,1,2);
+	xyz B = xyz(2,3,1);
+	a = 0;
+	b = 0;
+	c = 0;
+	List d = [A,A,A,B,B,B];
+	for (ob in d)
+	{
+		a = ob.x+a;
+		b = b+ob.y;
+		c = c+ob.z;
+	}
+	if(a == 6&&b== 12&&c == 9)
+	{
+		write("Test Successful\n");
+	}
+	else
+	{
+		write("Test Successful\n");
+	}
+}

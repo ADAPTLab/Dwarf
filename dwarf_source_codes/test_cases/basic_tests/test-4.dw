@@ -1,0 +1,16 @@
+//Test for parsing of arithmetic expressions
+main()
+{
+	a = 2.0;
+	b = 3.0;
+	c = 5.5;
+	//y = (a+c)*1;
+	//write(y);
+	x = (a*b*c+(a+b+c))*1;
+	if(x == 43.5)
+	{
+		write("Test Successful");
+		write("\n");		
+	}
+
+}

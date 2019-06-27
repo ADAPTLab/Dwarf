@@ -1,0 +1,18 @@
+main()
+{
+	arr = [1,2,4,5];
+	x = 0;
+	for (cha in arr)
+	{
+		x = x+cha;
+	}
+	if(x ==12 )
+	{
+		write("Test Successful\n");
+	}
+	else
+	{
+		write("Test Unsuccessful\n");
+	}
+
+}

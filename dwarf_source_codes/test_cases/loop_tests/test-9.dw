@@ -1,0 +1,12 @@
+//changing for loop variable in between
+main()
+{
+	a = 0;
+	i  = 5;
+	for(i in [1..6])
+	{
+		i = 4;
+		a = a+1;
+	}
+	write(a);
+}
