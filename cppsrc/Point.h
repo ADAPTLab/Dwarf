@@ -18,62 +18,23 @@
 #include "cereal/types/vector.hpp"
 
 #define MAXSTRINGLEN 8
-#define GENERAL_POINT
-static const int MaxEles = 0;
-struct PointEle
-{
-	enum {INT, FLOAT, BOOLEAN, STRING, ERROR} tag;
-	union
-	{
-		int a;
-		double b;
-		bool c;
-		char d[MAXSTRINGLEN];
-	};
-	template <class Archive>
-	void serialize( Archive &ar)
-	{
-		ar(tag);
-		switch(tag)
-		{
-			case INT:	ar(a);
-					break;
-			case FLOAT:	ar(b);
-					break;
-			case BOOLEAN:	ar(c);
-					break;
-			case STRING:	ar(d);
-					break;
-			case ERROR:	break;
-		}
-	}
-	PointEle();
-	PointEle(int val);
-	PointEle(bool val);
-	PointEle(std::string val);
-	PointEle(double val);
-	PointEle operator= (int val);
-	operator double() const
-	{
-		switch(tag)
-		{
-			case INT:	return a;
-			case FLOAT:	return b;
-			case BOOLEAN:	return c;
-			default:	throw std::domain_error("\n**function not defined for current Point Element**\n");
-		}
-	}
-	PointEle operator+= (PointEle &p);
-	PointEle operator-= (PointEle &p);
-	PointEle operator- (PointEle &p);
-	PointEle operator+ (PointEle &p);
-	PointEle operator/ (int p);
-};
+typedef double PointEle;
+static const int MaxEles = 3;
+#define distanceEuclidean(A,B)	(sqrt(	\
+		((A).point_arr[0] - (B).point_arr[0])	\
+	*	((A).point_arr[0] - (B).point_arr[0])	\
+	+		\
+		((A).point_arr[1] - (B).point_arr[1])	\
+	*	((A).point_arr[1] - (B).point_arr[1])	\
+	+		\
+		((A).point_arr[2] - (B).point_arr[2])	\
+	*	((A).point_arr[2] - (B).point_arr[2])	\
+))
 class Point
 {
 //private:
 public:
-std::vector <PointEle> point_arr;
+PointEle point_arr[MaxEles];
 int NumEles;
 //public:
 	Point()

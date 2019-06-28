@@ -13,7 +13,7 @@ do
 	do
 		f=~/data/$dataset.arff;
 		result=./results/kmeans.$dataset.2000.mpi.$p;
-		make mpircluster f=$f K=2000 p=$p ARG=$threads | tee $result
+		make mpircluster f=$f K=2000 p=$p t=$threads | tee $result
 		#echo "f=$f K=2000 p=$p ARG=$threads";
 	done;
 	p=32;
@@ -21,7 +21,7 @@ do
         do
                 f=~/data/$dataset.arff;
                 result=./results/kmeans.$dataset.2000.hybrid.$p.$threads;
-                make hybridrcluster f=$f K=2000 p=$p ARG=$threads | tee $result
+                make hybridrcluster f=$f K=2000 p=$p t=$threads | tee $result
                 #echo "f=$f K=2000 p=$p ARG=$threads";
          done;
 done;

@@ -44,11 +44,11 @@ else
 fi
 
 # Uncomment one of the following
-echo "\tStarting Sequential Execution on the local machine\n"
-make localserial
+#echo "\tStarting Sequential Execution on the local machine\n"
+#make localserial
 
-#echo "\tStarting Distributed-memory Execution on the local machine using 4 local processes\n"
-#make localpar p=4
+echo "\tStarting Distributed-memory Execution on the local machine using 4 local processes\n"
+make localpar p=4
 
 #echo "\tStarting Distributed-memory Execution on the Cluster using 32 distributed processes\n"
 #make mpircluster p=32

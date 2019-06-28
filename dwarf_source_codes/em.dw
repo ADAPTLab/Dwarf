@@ -51,7 +51,7 @@ main(){
 	K = 5;			error = 0.2;		EPS = 0.0001;		maxIter = 10; 
 	File inputFile;	List<Point> data;
 	data = inputFile.ReadDataset("datasets/3droad.arff");
-	int dim = data[0].Size();
+	int dim = data[0].Size();	int n = data.Size();
 	seeds = [data[i] for i in [0..K-1]];
 	clusList = [EMCluster(seeds[i], dim, 1.0/K) for i in [0..K-1]];
 	int iter = 1;

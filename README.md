@@ -6,12 +6,29 @@ Its Parallelizing Compiler takes the sequential Dwarf code and produces either D
 ```shell
 sh dwarf.sh <dwarf file name>.dw
 ```
-  It will produce [output.cpp](cppsrc/output.cpp) , [outputslave.cpp](cppsrc/outputslave.cpp), [output.h](cppsrc/output.h), [Point.cpp](cppsrc/Point.cpp), and [Point.h](cppsrc/Point.h) in [cppsrc](cppsrc) directory.
-  
+1. Compiles Dwarf Source code to generate C++ code as per [Dwarf Compiler Flags](dependencies/config.txt)
+   * Master's C++ Code: [output.cpp](cppsrc/output.cpp)
+   * Slave's C++ Code: [outputslave.cpp](cppsrc/outputslave.cpp)
+   * C++ Header File: [output.h](cppsrc/output.h)
+   * Point Type Implementation C++ Code: [Point.cpp](cppsrc/Point.cpp)
+   * [Point.h](cppsrc/Point.h) in [cppsrc](cppsrc) directory.
+2. Compiles C++ Code to generate executables
+   * master
+   * slave
+3. Execute the executables using one of make targets
+   * localserial : Sequential Execution on the local machine
+   * localpar p=4 : Distributed-memory Execution by 4 processes on the local machine
+   * localhybrid p=4 t=2 : Hybrid-memory Execution by 4 processes and 2 threads on the local machine
+   * serial : Sequential Execution on the given *host* machine
+   * mpircluster p=4 : Distributed-memory Execution by 4 processes on the *cluster* (assumes a hostlist for MPI)
+   * hybridrcluster p=4 t=2 : Hybrid-memory Execution by 4 processes and 2 threads on the *cluster* (assumes a hostlist for MPI)
+
 
 ## Dependencies
-The Dwarf Compiler requires Java 1.8.
-It requires [config.txt](dependencies/config.txt) and [weka.jar](dependencies/weka.jar) available in the [dependencies](dependencies) directory.
+* Java version 1.8
+* C++ version C++11
+* Weka Java API : [weka.jar](dependencies/weka.jar) available in the [dependencies](dependencies) directory.
+* Dwarf Compiler Flag File : [config.txt](dependencies/config.txt) available in the [dependencies](dependencies) directory.
 
 ## Generated CPP Code
 Compiler generates code in cppsrc directory. It already has a few codes.
@@ -36,3 +53,8 @@ Comparison of various manual parallel implementations of Representative-based Cl
   * EMDis (Manual MPI C++): [EMDis](benchmark_codes/EMDis)
   * EMHyb (Manual MPI OpenMP C++): [EMHyb](benchmark_codes/EMHyb)
   * ESJav (Manual Spark Java): [ESJav](benchmark_codes/ESJav)
+
+## Sample Test Codes
+* [Basic Tests](dwarf_source_codes/test_cases/basic_tests)
+* [Object Oriented Programs Tests](dwarf_source_codes/test_cases/oop_tests)
+* [Loop Tests](dwarf_source_codes/test_cases/loop_tests)

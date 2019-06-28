@@ -8,4 +8,22 @@
 #include "Library.h"
 #include "mpi.h"
 
-	void func();
+#include "clustering.h"
+
+class KmeansCluster;
+
+class KmeansCluster {
+	public :
+	Point rep;
+	Point oldRep;
+	int count;
+	KmeansCluster() {}
+	KmeansCluster(Point p);
+	template <class Archive>
+	void serialize( Archive & ar )
+	{
+		ar(rep, oldRep, count);
+	}
+};
+
+	double ConvergenceCriteria(List<KmeansCluster> CL);

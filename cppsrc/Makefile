@@ -34,11 +34,8 @@ all: master slave
 clean:
 	rm -f $(EXEC_NAME) $(OBJECTS) $(EXEC_NAME_SLAVE) $(OBJECTS_SLAVE)
 
-# Targets for Executing code
-# Targets for ADAPT Lab Cluster
+# Targets for Executing code on a cluster
 # Assumes that a hostlist32 file is available in the home directory with node names of all machines in the cluster
-par:
-	$(CC_PATH)mpirun -np 1 --pernode -host $(host) $(EXEC_PATH)$(EXEC_NAME) $(f) $(K) $(m) $(out) $(timefile) : -np $(p) -hostfile ~/hostlist32 $(EXEC_PATH)$(EXEC_NAME_SLAVE)
 
 mpircluster:
 	$(CC_PATH)mpirun -np 1 -host $(host) $(EXEC_PATH)$(EXEC_NAME) $(f) $(K) $(m) $(out) $(timefile) : -np $(p) --map-by node -hostfile ~/hostlist32 $(EXEC_PATH)$(EXEC_NAME_SLAVE)
@@ -46,7 +43,7 @@ mpircluster:
 serial:
 	$(CC_PATH)mpirun -np 1 -host $(host) $(EXEC_PATH)$(EXEC_NAME) $(f) $(K) $(m) $(out) $(timefile)
 
-hybrid:
+hybridrcluster:
 	$(CC_PATH)mpirun -np 1 --pernode -host $(host) $(EXEC_PATH)$(EXEC_NAME) $(f) $(K) $(m) $(out) $(timefile) : -np $(p) -x OMP_NUM_THREADS=$(t) -x GOMP_CPU_AFFINITY=0-7 -hostfile ~/hostlist32 $(EXEC_PATH)$(EXEC_NAME_SLAVE)
 
 
@@ -57,6 +54,8 @@ localpar:
 localserial:
 	$(CC_PATH)mpirun -np 1 -host localhost $(EXEC_PATH)$(EXEC_NAME) $(K) $(m) $(out) $(timefile)
 
+localhybrid:
+	$(CC_PATH)mpirun -oversubscribe -np 1 $(EXEC_PATH)$(EXEC_NAME) $(K) : -np $(p) -x OMP_NUM_THREADS=$(t) -x GOMP_CPU_AFFINITY=0-7 $(EXEC_PATH)$(EXEC_NAME_SLAVE)
 
 # targets to debug using xterm in parallel
 debug:
