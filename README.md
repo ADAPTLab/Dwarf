@@ -1,6 +1,6 @@
 # Dwarf
 Dwarf is a Domain Specific Language for Representative-Based Clustering Algorithms.
-Its Parallelizing Compiler takes the sequential Dwarf code and produces either Distributed-memory MPI C++ code or Hybrid-memory MPI+OpenMP C++ Code.
+Its Parallelizing Compiler takes the sequential Dwarf code and produces either Distributed-memory MPI C++ code or Hybrid-memory (MPI and OpenMP) C++ Code.
 
 ## Usage
 ```shell
